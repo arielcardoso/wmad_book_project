@@ -4,7 +4,7 @@ Project developed for WMAD Web Course. For educational purpose only.
 
 
 ### Project Page
-https://arielcardoso.github.io/wmad_freecell/
+https://arielcardoso.github.io/wmad_book_project/
 
 
 ### Tech Stack
