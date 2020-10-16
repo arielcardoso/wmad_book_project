@@ -1,28 +1,37 @@
 const API_URL = 'https://api.nytimes.com/svc/books/v3/';
 
 $(function() {
-    // Load books when the form is submited
-    $('#searchForm').submit(e => {
-        e.preventDefault();
-        let keyword = $(this).find(".keyword").val();
-        let date = 'current';
-        let list = 'hardcover-fiction';
+    loadBooks();
+});
 
-        $.ajax({
-            url: API_URL + `lists/${date}/${list}.json?api-key=${config.API_KEY}`,
-            type: 'GET',
-            dataType: 'json',
-            success: function(res) { 
-                let bookData = sanitizeData(res);
-                displayData(bookData);
-            },
-            error: function(request) {
-                displayError(request.error);
-                //console.log(`${request.status} : ${request.error}`);
-            }
-         })
-    });
-})
+function loadBooks() {
+    const date = 'current';
+    const list = 'hardcover-fiction';
+
+    $.ajax({
+        url: API_URL + `lists/${date}/${list}.json?api-key=${config.API_KEY}`,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: startLoading,
+        complete: stopLoading,
+        success: function(res) { 
+            $('#list-name').text(res.results.list_name);
+            $('#published-date').text(res.results.published_date);
+            displayData(sanitizeData(res));
+        },
+        error: function(request) {
+            displayError(request.error);
+        }
+     })
+}
+
+function startLoading() {
+    $('.loading').show();
+}
+
+function stopLoading() {
+    $('.loading').hide();
+}
 
 function displayError(status) {
     $('.list').empty();
@@ -38,6 +47,9 @@ function displayData(items) {
         const img = $('<img class="img-fluid">').attr('src', data.image)
         itemDiv.append(img);
 
+        const labelRank = $(`<div class="label-rank">${data.rank}</label>`);
+        itemDiv.append(labelRank);
+
         const title = $('<h4 class="title"></h4>').text(data.title);
         itemDiv.append(title);
 
@@ -45,20 +57,13 @@ function displayData(items) {
         divAuthor.append($('<span class="small"></span>').text(`Author`));
         divAuthor.append($('<span></span>').text(data.author));
         itemDiv.append(divAuthor);
-
-        const divRank = $('<div class="div-info"></div>');
-        divRank.append($('<span class="small"></span>').text(`Rank`));
-        divRank.append($(`<span class="rank"></span>`).text(data.rank));
-        itemDiv.append(divRank);
-
-        const innerDiv = $('<div class="inner-item"></div>')
         
         const desc = $('<p class="desc"></p>').text(data.description);
-        innerDiv.append(desc);
-        const button = $('<a class="btn btn-warning d-block" href="'+ data.product_url +'" target="_blank"></a>').text("BUY BOOK");
-        innerDiv.append(button);
+        itemDiv.append(desc);
 
-        itemDiv.append(innerDiv);
+        const button = $('<a class="btn btn-warning d-block" href="'+ data.product_url +'" target="_blank"></a>').text("BUY BOOK");
+        itemDiv.append(button);
+
         $('.list').append(itemDiv)
     })
 }

@@ -6,6 +6,23 @@ body {
     min-height: 100vh;
     padding-bottom: 100px;
 }
+.loading {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(255,255,255, 0.95);
+}
+.loading .spinner-border {
+    position: absolute;
+    margin-left: -25px;
+    margin-top: -25px;
+    top: 50%;
+    left: 50%;
+}
 footer {
     height: 100px;
     position: absolute;
@@ -23,7 +40,7 @@ footer {
     justify-content: start;
     position: relative;
     margin: 15px;
-    width: 250px;
+    width: 340px;
 }
 .book-item .title {
     padding: 0;
@@ -34,6 +51,7 @@ footer {
     align-self: flex-end;
     transition: all 0.3s ease-in-out;
     border: 0;
+    font-weight: bold;
 }
 .book-item a.btn:hover {
     background-color: #000;
@@ -52,6 +70,19 @@ footer {
 .book-item p.desc{
     margin-top: 1rem;
     text-align: justify;
+}
+.book-item .label-rank {
+    position: absolute;
+    z-index: 100;
+    top: 20px;
+    right: 20px;
+    background: gold;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #111;
+    text-align: right;
+    text-shadow: 1px 1px 1px rgba(0,0,0, 0.1);
 }
 
 @media only screen and (max-width: 575.98px) {

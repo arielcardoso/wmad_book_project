@@ -12,6 +12,11 @@
     <script src="scripts/api.js"></script>
 </head>
 <body>
+    <div class="loading">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     <nav class="navbar navbar-light bg-dark">
         <a class="navbar-brand text-white">Book Project</a>
         <form id="searchForm" class="form-inline" action="">
@@ -29,7 +34,9 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mt-4">
-                <h2>Book List</h2>
+                <h2>Best Seller</h2>
+                <p class="mb-0">The list of best seller <span class="font-weight-bold" id="list-name" ></span> books.</p>
+                <p>Published at <span class="font-weight-bold" id="published-date"></span>.</p>
                 <hr>
             </div>
         </div>
