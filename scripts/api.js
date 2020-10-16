@@ -61,7 +61,7 @@ function displayData(items) {
         const desc = $('<p class="desc"></p>').text(data.description);
         itemDiv.append(desc);
 
-        const button = $('<a class="btn btn-warning d-block" href="'+ data.product_url +'" target="_blank"></a>').text("BUY BOOK");
+        const button = $('<a class="btn btn-warning d-block" href="'+ data.product_url +'" target="_blank">BUY BOOK &nbsp; <i class="fas fa-shopping-cart"></i></a>');
         itemDiv.append(button);
 
         $('.list').append(itemDiv)
