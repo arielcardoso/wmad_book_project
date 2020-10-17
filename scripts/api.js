@@ -22,7 +22,35 @@ function loadBooks() {
         error: function(request) {
             displayError(request.error);
         }
+     }).then(()=>{
+        loadFavoriteBooks();
      })
+}
+
+function loadFavoriteBooks(){
+    $(".favorite").each(function() {
+        // Check if was favorited
+        let bookId = $(this).data("bookid");
+        if (localStorage.getItem(bookId)) {
+            $(this).toggleClass("favorited");
+        }
+
+        // Add click event
+        $(this).click(function(e){
+            e.preventDefault();
+            setFavorite($(this));
+        });
+    });
+}
+
+function setFavorite(element) {
+    $(element).toggleClass("favorited");
+    let bookId = $(element).data("bookid");
+    if (localStorage.getItem(bookId)) {
+        localStorage.removeItem(bookId);
+    } else {
+        localStorage.setItem(bookId, true);
+    }
 }
 
 function startLoading() {
@@ -42,7 +70,7 @@ function displayData(items) {
     $('.list').empty();
 
     (items).forEach((data) => {
-        const itemDiv = $('<div class="book-item card card-body"></div>').attr('id', data.id);
+        const itemDiv = $(`<div id="${data.id}" class="book-item card card-body"></div>`).attr('id', data.id);
 
         const img = $('<img class="img-fluid">').attr('src', data.image)
         itemDiv.append(img);
@@ -60,9 +88,14 @@ function displayData(items) {
         
         const desc = $('<p class="desc"></p>').text(data.description);
         itemDiv.append(desc);
-
+        
+        const actions = $(`<div class="actions" ></div>`);
+        const favorite = $(`<a href="" class="favorite" data-bookid="${data.id}" ></a>`);
+        actions.append(favorite);
         const button = $('<a class="btn btn-warning d-block" href="'+ data.product_url +'" target="_blank">BUY BOOK &nbsp; <i class="fas fa-shopping-cart"></i></a>');
-        itemDiv.append(button);
+        actions.append(button);
+        
+        itemDiv.append(actions);
 
         $('.list').append(itemDiv)
     })

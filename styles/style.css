@@ -40,7 +40,7 @@ footer {
     justify-content: start;
     position: relative;
     margin: 15px;
-    width: 340px;
+    width: 220px;
 }
 .book-item .title {
     padding: 0;
@@ -83,6 +83,31 @@ footer {
     color: #111;
     text-align: right;
     text-shadow: 1px 1px 1px rgba(0,0,0, 0.1);
+}
+.book-item .actions {
+    display: flex;
+    justify-content: space-between;
+}
+.book-item .actions .favorite {
+    color: #222;
+    font-size: 1.6rem;
+    transition: all 0.3s ease-in-out;
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+}
+.book-item .actions .favorite:before {
+    content: "\f004";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    text-decoration: none;
+}
+.book-item .actions .favorite:hover {
+    transform: scale(1.2);
+}
+.book-item .actions .favorited:before {
+    font-weight: 700 !important;
+    color: brown !important;
 }
 
 @media only screen and (max-width: 575.98px) {
