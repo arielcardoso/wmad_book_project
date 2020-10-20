@@ -1,22 +1,39 @@
 const API_URL = 'https://api.nytimes.com/svc/books/v3/';
 
 $(function() {
-    loadBooks();
+    loadListNames();
+
+    $('#nameList').on('change', function() {
+        loadBooks(this.value);
+    });
 });
 
-function loadBooks() {
-    const date = 'current';
-    const list = 'hardcover-fiction';
-
+function loadListNames() {
     $.ajax({
-        url: API_URL + `lists/${date}/${list}.json?api-key=${config.API_KEY}`,
+        url: API_URL + `lists/names.json?api-key=${config.API_KEY}`,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: startLoading,
+        complete: stopLoading,
+        success: function(res) {
+            displaySelect(sanitizeListNames(res));
+        },
+        error: function(request) {
+            displayError(request.error);
+        }
+     })
+}
+
+function loadBooks(listName) {
+    $.ajax({
+        url: API_URL + `lists/current/${listName}.json?api-key=${config.API_KEY}`,
         type: 'GET',
         dataType: 'json',
         beforeSend: startLoading,
         complete: stopLoading,
         success: function(res) { 
             $('#list-name').text(res.results.list_name);
-            $('#published-date').text(res.results.published_date);
+            $('#list-date').text(res.results.published_date);
             displayData(sanitizeData(res));
         },
         error: function(request) {
@@ -62,12 +79,19 @@ function stopLoading() {
 }
 
 function displayError(status) {
-    $('.list').empty();
+    $('#bookList').empty();
     const p = $('<p class="error"><p>').text();
 }
 
+function displaySelect(items) {
+    (items).forEach((data) => {        
+        var option = new Option(data.name, data.id);
+        $('#nameList').append(option)
+    });
+}
+
 function displayData(items) {
-    $('.list').empty();
+    $('#bookList').empty();
 
     (items).forEach((data) => {
         const itemDiv = $(`<div id="${data.id}" class="book-item card card-body"></div>`).attr('id', data.id);
@@ -97,8 +121,19 @@ function displayData(items) {
         
         itemDiv.append(actions);
 
-        $('.list').append(itemDiv)
+        $('#bookList').append(itemDiv)
     })
+}
+
+function sanitizeListNames(data) {
+    let list = [];
+    for (let i=0; i < 10; i++) {
+        list.push({
+            id: data.results[i].list_name_encoded,
+            name: (typeof data.results[i].list_name === 'undefined') ? 'Unknown': data.results[i].list_name
+        })
+    }
+    return list;
 }
 
 function sanitizeData(response) {

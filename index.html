@@ -34,15 +34,22 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mt-4">
-                <h2>Best Seller</h2>
-                <p class="mb-0">The list of best seller <span class="font-weight-bold" id="list-name" ></span> books.</p>
-                <p>Published at <span class="font-weight-bold" id="published-date"></span>.</p>
+                <h2>Best Sellers</h2>
+                <div class="form-group">
+                    <select id="nameList" class="form-control"  >
+                        <option value="" selected >Select...</option>
+                    </select>
+                </div>
                 <hr>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <div class='list d-flex justify-content-between'>
+                <div>
+                    <p class="mb-0">The list of best seller <span class="font-weight-bold" id="list-name" ></span> books.</p>
+                    <p>Published at <span class="font-weight-bold" id="list-date"></span>.</p>
+                </div>
+                <div id="bookList" class='list d-flex justify-content-between'>
 
                 </div>
             </div>
