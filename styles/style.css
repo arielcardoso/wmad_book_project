@@ -6,6 +6,7 @@ body {
     min-height: 100vh;
     padding-bottom: 100px;
 }
+
 .loading {
     position: fixed;
     display: none;
@@ -14,8 +15,9 @@ body {
     right: 0;
     bottom: 0;
     z-index: 1000;
-    background: rgba(255,255,255, 0.95);
+    background: rgba(255, 255, 255, 0.95);
 }
+
 .loading .spinner-border {
     position: absolute;
     margin-left: -25px;
@@ -23,17 +25,20 @@ body {
     top: 50%;
     left: 50%;
 }
+
 footer {
     height: 100px;
     position: absolute;
     bottom: 0;
     width: 100%;
 }
-.list{
+
+.list {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
 }
+
 .book-item {
     display: flex;
     flex-direction: column;
@@ -42,35 +47,42 @@ footer {
     margin: 15px;
     width: 220px;
 }
+
 .book-item .title {
     padding: 0;
     overflow-y: hidden;
     margin: 1rem 0;
 }
+
 .book-item a.btn {
     align-self: flex-end;
     transition: all 0.3s ease-in-out;
     border: 0;
     font-weight: bold;
 }
+
 .book-item a.btn:hover {
     background-color: #000;
     color: goldenrod;
     border: 0;
 }
-.book-item .div-info {
+
+.div-info {
     display: flex;
     justify-content: space-between;
     border-top: 1px solid #eee;
     padding: 0.75rem 0;
 }
+
 .book-item .rank i {
     color: goldenrod;
 }
-.book-item p.desc{
+
+.book-item p.desc {
     margin-top: 1rem;
     text-align: justify;
 }
+
 .book-item .label-rank {
     position: absolute;
     z-index: 100;
@@ -82,12 +94,14 @@ footer {
     font-size: 1.4rem;
     color: #111;
     text-align: right;
-    text-shadow: 1px 1px 1px rgba(0,0,0, 0.1);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
+
 .book-item .actions {
     display: flex;
     justify-content: space-between;
 }
+
 .book-item .actions .favorite {
     color: #222;
     font-size: 1.6rem;
@@ -96,18 +110,56 @@ footer {
     height: 40px;
     text-decoration: none;
 }
+
 .book-item .actions .favorite:before {
     content: "\f004";
     font-family: "Font Awesome 5 Free";
     font-weight: 400;
     text-decoration: none;
 }
+
 .book-item .actions .favorite:hover {
     transform: scale(1.2);
 }
+
 .book-item .actions .favorited:before {
     font-weight: 700 !important;
     color: brown !important;
+}
+
+#bookInfo .desc {
+    position: relative;
+    padding-bottom: 20px;
+    transition: all 0.5s ease-in-out;
+    margin-bottom: 2rem;
+}
+
+#bookInfo .desc p {
+    overflow-y: hidden;
+    height: 100px;
+    transition: all 0.5s ease-in-out;
+}
+
+#bookInfo .desc::after {
+    content: "Read more";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-decoration: underline;
+}
+
+#bookInfo .desc-opened p {
+    height: auto;
+}
+
+#bookInfo .desc-opened::after {
+    content: "Less";
+}
+
+#bookInfo hr {
+    margin: 0;
 }
 
 @media only screen and (max-width: 575.98px) {
