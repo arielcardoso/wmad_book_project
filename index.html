@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <script src="config.ini"></script>
     <script src="scripts/api.js"></script>
 </head>
+
 <body>
     <div class="loading">
         <div class="spinner-border" role="status">
@@ -18,17 +20,9 @@
         </div>
     </div>
     <nav class="navbar navbar-light bg-dark">
-        <a class="navbar-brand text-white">Book Project</a>
-        <form id="searchForm" class="form-inline" action="">
-            <div class="input-group">
-                <input type="text" class="form-control keyword" placeholder="Enter the keyword" >
-                <div class="input-group-append">
-                    <button class="btn btn-success" type="submit" >
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+        <a href="index.html" class="navbar-brand text-white">
+            <i class="fas fa-book mr-2"></i> Book Project
+        </a>
     </nav>
 
     <div class="container">
@@ -36,7 +30,7 @@
             <div class="col-12 mt-4">
                 <h2>Best Sellers</h2>
                 <div class="form-group">
-                    <select id="nameList" class="form-control"  >
+                    <select id="nameList" class="form-control">
                         <option value="" selected >Select...</option>
                     </select>
                 </div>
@@ -46,7 +40,7 @@
         <div class="row">
             <div class="col-12">
                 <div>
-                    <p class="mb-0">The list of best seller <span class="font-weight-bold" id="list-name" ></span> books.</p>
+                    <p class="mb-0">The list of best seller <span class="font-weight-bold" id="list-name"></span> books.</p>
                     <p>Published at <span class="font-weight-bold" id="list-date"></span>.</p>
                 </div>
                 <div id="bookList" class='list d-flex justify-content-between'>
@@ -61,5 +55,16 @@
         <p class="mb-1">For educational purpose only.</p>
         <p class="small">© 2020 - All rights reserved</p>
     </footer>
+
+    <script>
+        $(function() {
+            loadBookList();
+
+            $('#nameList').on('change', function() {
+                loadBooks(this.value);
+            });
+        });
+    </script>
 </body>
+
 </html>
